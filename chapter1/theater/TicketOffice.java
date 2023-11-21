@@ -14,16 +14,22 @@ public class TicketOffice {
         this.amount = amount;
         this.tickets.addAll(Arrays.asList(tickets));
     }
+
+    public void sellTo(Audience audience) {
+        // 판매된 금액 매표소에 증가시킴
+        plusAmount(audience.buy(getTickets()));
+    }
     // 티켓 판매
-    public Ticket getTickets() {
+    private Ticket getTickets() {
         return tickets.remove(0);
     }
-    // 판매 금액 차감
-    public void minusAmount(Long amount) {
-        this.amount -= amount;
-    }
+
     // 판매 금액 증가
-    public void plusAmount(Long amount) {
+    private void plusAmount(Long amount) {
         this.amount += amount;
+    }
+    // 판매 금액 차감
+    private void minusAmount(Long amount) {
+        this.amount -= amount;
     }
 }

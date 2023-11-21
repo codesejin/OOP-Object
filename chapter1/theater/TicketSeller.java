@@ -8,7 +8,6 @@ public class TicketSeller {
     }
 
     public void sellTo(Audience audience) {
-        // 판매된 금액 매표소에 증가시킴
-        ticketOffice.plusAmount(audience.buy(ticketOffice.getTickets()));
+        ticketOffice.sellTo(audience);
     }
 }
