@@ -7,10 +7,6 @@ public class Audience {
         this.bag = bag;
     }
 
-    public Bag getBag() {
-        return bag;
-    }
-
     public Long buy (Ticket ticket) {
         // 자신의 가방안에 초대장이 있는지 확인 -> 이벤트 당첨자
         if (bag.hasInvitation()) {
