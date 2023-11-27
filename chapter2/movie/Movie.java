@@ -21,7 +21,6 @@ public class Movie {
     }
 
     public Money calculateMovieFee(Screening screening) {
-        if(disCountPolicy == null) return fee;
         return fee.minus(disCountPolicy.calculateDiscountAmount(screening));
     }
 }
