@@ -23,4 +23,8 @@ public class Movie {
     public Money calculateMovieFee(Screening screening) {
         return fee.minus(disCountPolicy.calculateDiscountAmount(screening));
     }
+
+    public void changeDiscountPolicy(DiscountPolicy disCountPolicy) {
+        this.disCountPolicy = disCountPolicy;
+    }
 }

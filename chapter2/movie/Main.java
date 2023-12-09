@@ -21,5 +21,7 @@ public class Main {
                 Duration.ofMinutes(210),
                 Money.wons(10000),
                 new NoneDiscountPolicy());
+
+        avatar.changeDiscountPolicy(new PercentDiscountPolicy(0.1));
     }
 }
