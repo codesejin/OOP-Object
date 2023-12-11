@@ -18,3 +18,4 @@
 4. 설계 품질과 트레이드 오프
      - [Github 코드 링크](https://github.com/codesejin/OOP-Object/tree/master/chapter4/movie)
      - [데이터 중심 설계의 문제점, 캡슐화를 따르면 높은 응집도와 낮은 결합도를 가질 수 있다.](https://strong-park.tistory.com/entry/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EC%84%A4%EA%B3%84-%ED%92%88%EC%A7%88%EA%B3%BC-%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%93%9C%EC%98%A4%ED%94%84)
+     - [스스로 자신의 데이터는 책임지는 객체, 여전히 캡슐화 위반으로 데이터 중심 설계는 문제다](https://strong-park.tistory.com/entry/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EC%84%A4%EA%B3%84-%ED%92%88%EC%A7%88%EA%B3%BC-%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%93%9C%EC%98%A4%ED%94%842)
