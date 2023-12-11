@@ -1,81 +1,68 @@
 package chapter4.movie;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Movie {
     /**
-     * 영화 제목
+     * 어떤 데이터를 포함하고 있는지
      */
     private String title;
-
-    /**
-     * 영화 재생 시간
-     */
     private Duration runningTime;
-
-    /**
-     * 영화 관람 가격
-     */
     private Money fee;
-
-    /**
-     * 영화 할인 정책 계산
-     */
     private List<DiscountCondition> discountConditions;
-
-    /**
-     * 영화 할인 정책 타입
-     */
     private MovieType movieType;
-
-    /**
-     * 할인 가격 정보
-     */
     private Money discountAmount;
-
-    /**
-     * 할인 비율 정보
-     */
     private double discountPercent;
 
+    /**
+     * 위의 데이터를 처리하기 위해 어떤 오퍼레이션이 필요한지
+     */
+
+    // 총 요금 계산 - 할인 정책
     public MovieType getMovieType() {
         return movieType;
     }
 
-    public void setMovieType(MovieType movieType) {
-        this.movieType = movieType;
+    public Money calculateAmountDiscountedFee() {
+        if (movieType != MovieType.AMOUNT_DISCOUNT) {
+            throw new IllegalArgumentException();
+        }
+
+        return fee.minus(discountAmount);
     }
 
-    public Money getFee() {
+    public Money calculatePercentDiscountedFee() {
+        if (movieType != MovieType.PERCENT_DISCOUNT) {
+            throw new IllegalArgumentException();
+        }
+
+        return fee.minus(fee.times(discountPercent));
+    }
+
+    public Money calculateNoneDiscountedFee() {
+        if (movieType != MovieType.NONE_DISCOUNT) {
+            throw new IllegalArgumentException();
+        }
+
         return fee;
     }
 
-    public void setFee(Money fee) {
-        this.fee = fee;
-    }
-
-    public List<DiscountCondition> getDiscountConditions() {
-        return discountConditions;
-    }
-
-    public void setDiscountConditions(List<DiscountCondition> discountConditions) {
-        this.discountConditions = discountConditions;
-    }
-
-    public Money getDiscountAmount() {
-        return discountAmount;
-    }
-
-    public void setDiscountAmount(Money discountAmount) {
-        this.discountAmount = discountAmount;
-    }
-
-    public double getDiscountPercent() {
-        return discountPercent;
-    }
-
-    public void setDiscountPercent(double discountPercent) {
-        this.discountPercent = discountPercent;
+    // 할인 여부 판단 - 객체가 할인조건 목록 포함 중
+    public boolean isDiscountable(LocalDateTime whenScreened, int sequence) {
+        for (DiscountCondition condition : discountConditions) {
+            if (condition.getType() == DiscountConditionType.PERIOD) {
+                if (condition.isDiscountable(whenScreened.getDayOfWeek(), whenScreened.toLocalTime())) {
+                    return true;
+                }
+            } else {
+                if (condition.isDiscountable(sequence)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

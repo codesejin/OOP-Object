@@ -4,41 +4,36 @@ import java.time.LocalDateTime;
 
 public class Screening {
     /**
-     * 상영될 영화 정보
+     * 어떤 데이터를 포함하고 있는지
      */
     private Movie movie;
-
-    /**
-     * 상영 회차 정보
-     */
     private int sequence;
-
-    /**
-     * 상영 시작 시간
-     */
     private LocalDateTime whenScreened;
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
+    public Screening(Movie movie, int sequence, LocalDateTime whenScreened) {
         this.movie = movie;
-    }
-
-    public LocalDateTime getWhenScreened() {
-        return whenScreened;
-    }
-
-    public void setWhenScreened(LocalDateTime whenScreened) {
+        this.sequence = sequence;
         this.whenScreened = whenScreened;
     }
 
-    public int getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(int sequence) {
-        this.sequence = sequence;
+    /**
+     * 위의 데이터를 처리하기 위해 어떤 오퍼레이션이 필요한지
+     */
+    public Money calculateFee(int audienceCount) {
+        switch (movie.getMovieType()) {
+            case AMOUNT_DISCOUNT:
+                if (movie.isDiscountable(whenScreened, sequence)) {
+                    return movie.calculateAmountDiscountedFee().times(audienceCount);
+                }
+                break;
+            case PERCENT_DISCOUNT:
+                if (movie.isDiscountable(whenScreened, sequence)) {
+                    return movie.calculatePercentDiscountedFee().times(audienceCount);
+                }
+                break;
+            case NONE_DISCOUNT:
+                return movie.calculateNoneDiscountedFee().times(audienceCount);
+        }
+        return movie.calculateNoneDiscountedFee().times(audienceCount);
     }
 }
