@@ -21,4 +21,8 @@ public class Screening {
     public LocalDateTime getWhenScreened() {
         return whenScreened;
     }
+
+    public Movie getMovie() {
+        return movie;
+    }
 }

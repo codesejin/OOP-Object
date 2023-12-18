@@ -17,7 +17,7 @@ public abstract class Movie {
         this.discountConditions = Arrays.asList(discountConditions);
     }
 
-    private Money calculateMovieFee(Screening screening) {
+    public Money calculateMovieFee(Screening screening) {
         if (isDiscountable(screening)) {
             return fee.minus(calculateDiscountAmount());
         }
@@ -33,5 +33,9 @@ public abstract class Movie {
 
     protected Money getFee() {
         return fee;
+    }
+
+    public List<DiscountCondition> getDiscountConditions() {
+        return discountConditions;
     }
 }
